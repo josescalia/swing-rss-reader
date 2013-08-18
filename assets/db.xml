@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<db>
+     <rss>
+          <id>1</id>
+          <title>Inilah Bola Dong</title>
+          <link>http://www.inilah.com/rss/feed/bola/</link>
+     </rss>
+     <rss>
+          <id>2</id>
+          <title>Detik.com</title>
+          <link>http://detik.feedsportal.com/c/33613/f/589693/index.rss</link>
+     </rss>
+     <rss>
+          <id>3</id>
+          <title>Torrent Movies</title>
+          <link>http://torrentz.eu/feed?q=.movies</link>
+     </rss>
+     <rss>
+          <id>4</id>
+          <title>Google News</title>
+          <link>http://news.google.com/?output=rss</link>
+     </rss>
+     <rss>
+          <id>5</id>
+          <title>Yahoo News and Media</title>
+          <link>http://dir.yahoo.com/rss/dir/getrss.php?news</link>
+     </rss>
+     <rss>
+          <id>6</id>
+          <title>Yahoo Movie</title>
+          <link>http://dir.yahoo.com/rss/dir/getrss.php?ent_mov</link>
+     </rss>
+     <rss>
+          <id>7</id>
+          <title>CNN News</title>
+          <link>http://rss.cnn.com/rss/edition.rss</link>
+     </rss>
+     <rss>
+          <id>8</id>
+          <title>21 Cineplex</title>
+          <link>http://www.21cineplex.com/feeds/news.xml</link>
+     </rss>
+     <rss>
+          <id>9</id>
+          <title>Republika Online</title>
+          <link>http://www.republika.co.id/rss</link>
+     </rss>
+</db>
