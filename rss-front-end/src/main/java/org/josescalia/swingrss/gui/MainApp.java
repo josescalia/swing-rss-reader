@@ -7,6 +7,7 @@ package org.josescalia.swingrss.gui;
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import org.josescalia.swingrss.gui.form.AboutForm;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.josescalia.swingrss.gui.form.RssFeedForm;
@@ -45,6 +46,7 @@ public class MainApp extends javax.swing.JFrame {
         mnExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnSuggestedFeed = new javax.swing.JMenuItem();
+        mnAboutBox = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rss Reader");
@@ -112,6 +114,14 @@ public class MainApp extends javax.swing.JFrame {
         });
         jMenu2.add(mnSuggestedFeed);
 
+        mnAboutBox.setText("About");
+        mnAboutBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAboutBoxActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnAboutBox);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -156,8 +166,18 @@ public class MainApp extends javax.swing.JFrame {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(form);
         mainPanel.validate();
-        lblPanelAction.setText("Editin Suggested Feed");
+        lblPanelAction.setText("Editing Suggested Feed");
     }//GEN-LAST:event_mnSuggestedFeedActionPerformed
+
+    private void mnAboutBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAboutBoxActionPerformed
+        removePanelFromMain();
+        AboutForm form = ctx.getBean(AboutForm.class);
+        form.showForm();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(form);
+        mainPanel.validate();
+        lblPanelAction.setText("About Swing RssReader Application");
+    }//GEN-LAST:event_mnAboutBoxActionPerformed
 
     private void removePanelFromMain(){
         if (mainPanel.getComponentCount() > 0) {
@@ -214,6 +234,7 @@ public class MainApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblPanelAction;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JMenuItem mnAboutBox;
     private javax.swing.JMenuItem mnExit;
     private javax.swing.JMenuItem mnRssReader;
     private javax.swing.JMenuItem mnSuggestedFeed;

@@ -57,5 +57,13 @@
           class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
+    <bean id="sAppTitle" class="java.lang.String">
+        <constructor-arg value="${app.title}"/>
+    </bean>
+
+    <bean id="sAppDescription" class="java.lang.String">
+        <constructor-arg value="${app.description}"/>
+    </bean>
 
 </beans>
