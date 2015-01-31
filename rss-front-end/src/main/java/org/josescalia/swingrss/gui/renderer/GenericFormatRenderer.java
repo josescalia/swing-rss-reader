@@ -47,4 +47,8 @@ public class GenericFormatRenderer extends DefaultTableCellRenderer {
         return new GenericFormatRenderer(DateFormat.getTimeInstance());
     }
 
+
+    public static void main(String[] args) {
+        GenericFormatRenderer.getDateTimeRenderer().setValue("Sat, 31 Jan 2015 13:27:45 GMT");
+    }
 }

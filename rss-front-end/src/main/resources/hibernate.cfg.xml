@@ -7,5 +7,6 @@
     <session-factory>
     <!-- mapping files -->
     <mapping class="org.josescalia.rss.model.Rss"/>
+    <mapping class="org.josescalia.rss.model.ApplicationConfig"/>
     </session-factory>
 </hibernate-configuration>

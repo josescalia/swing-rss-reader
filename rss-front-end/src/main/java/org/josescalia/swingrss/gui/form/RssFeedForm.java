@@ -7,9 +7,12 @@ package org.josescalia.swingrss.gui.form;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import org.apache.log4j.Logger;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.josescalia.rss.model.Rss;
 import org.josescalia.swingrss.service.RssService;
+import org.josescalia.swingrss.service.impl.RssServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,9 +24,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class RssFeedForm extends javax.swing.JPanel {
-
+        
+    static Logger logger = Logger.getLogger(RssFeedForm.class.getName());
+    
     @Autowired
-    RssService service;
+    RssServiceImpl service;
     private List<Rss> rssList = new ArrayList<Rss>();
     private Rss selectedRss;
 
@@ -31,12 +36,14 @@ public class RssFeedForm extends javax.swing.JPanel {
         setRssList(ObservableCollections.observableList(service.getAll()));
         initComponents();
         FormUtil.setupStartUpBtn(btnPanel);
+        txtRssId.setVisible(false);
     }
     /**
      * Creates new form RssFeedForm
      */
     public RssFeedForm() {
         selectedRss = new Rss();
+       
         //service = new RssService();
     }
 
@@ -207,33 +214,44 @@ public class RssFeedForm extends javax.swing.JPanel {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Long.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
         columnBinding.setColumnName("Title");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${link}"));
         columnBinding.setColumnName("Link");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${selectedRss}"), jTable1, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
         bindingGroup.addBinding(binding);
 
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -241,23 +259,23 @@ public class RssFeedForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(pnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
 
         bindingGroup.bind();
@@ -301,9 +319,12 @@ public class RssFeedForm extends javax.swing.JPanel {
             if(selectedRss==null){ //should be new RSS object
                selectedRss = new Rss(txtRssTitle.getText(),txtRssLink.getText());
             }
-            if(service.save(selectedRss) != null){
+            try {
+                service.save(selectedRss);
                 JOptionPane.showMessageDialog(this, "Save Success");
-            }else{
+
+            }catch (Exception e){
+                logger.error("Exception " + e.getMessage());
                 JOptionPane.showMessageDialog(this, "Save Failed");
             }
         }
@@ -318,12 +339,13 @@ public class RssFeedForm extends javax.swing.JPanel {
             return;
         }
         if(JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are you sure to delete this record","Confirmation",JOptionPane.YES_NO_OPTION)){
-            if(service.delete(selectedRss.getId())){
-                JOptionPane.showMessageDialog(this, "Record deleted");
-                setRssList(ObservableCollections.observableList(service.getAll()));
-            }else{
-                JOptionPane.showMessageDialog(this, "Cannot do delete action");
+            try{
+                service.delete(selectedRss.getId());
+            }catch (Exception e){
+                logger.error(e);
+                JOptionPane.showMessageDialog(this, "Error : " + e);
             }
+            setRssList(ObservableCollections.observableList(service.getAll()));
         }
         setSelectedRss(new Rss());
     }//GEN-LAST:event_btnDeleteActionPerformed

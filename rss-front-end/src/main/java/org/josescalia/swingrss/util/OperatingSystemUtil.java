@@ -87,4 +87,14 @@ public class OperatingSystemUtil {
     public static void main(String[] args) {
         OperatingSystemUtil.openParameterizedProgram("E:\\test.xml");
     }
+
+    public static String getOSInfo() {
+        if (osName.startsWith("Windows")) {
+            return "Windows";
+        }else if(osName.startsWith("unix")){
+            return "linux";
+        }else{
+            return "others";
+        }
+    }
 }

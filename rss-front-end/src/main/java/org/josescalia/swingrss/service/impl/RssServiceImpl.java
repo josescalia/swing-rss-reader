@@ -18,7 +18,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class RssServiceImpl implements RssService {
+public class RssServiceImpl{
 
     @Autowired
     private RssDao dao;
@@ -30,7 +30,7 @@ public class RssServiceImpl implements RssService {
 
     @Transactional(readOnly = true)
     public List<Rss> getList(Map<String, Object> map, int i, int i2) throws Exception {
-        return dao.getPaginatedList(map,i,i2);
+        return dao.getPaginatedList(map, i, i2);
     }
 
     @Transactional(readOnly = true)
@@ -39,12 +39,12 @@ public class RssServiceImpl implements RssService {
     }
 
     @Transactional(readOnly = false)
-    public Rss save(Rss rss) {
+    public Rss save(Rss rss) throws Exception{
         return dao.save(rss);
     }
 
     @Transactional(readOnly = false)
-    public boolean delete(Long aLong) {
+    public boolean delete(Long aLong)throws Exception {
         return dao.delete(aLong);
     }
 

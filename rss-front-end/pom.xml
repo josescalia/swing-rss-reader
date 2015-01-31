@@ -34,7 +34,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.josescalia.swingrss.gui.MainApp</mainClass>
+                            <mainClass>org.josescalia.swingrss.gui.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -58,11 +58,6 @@
             <groupId>org.jdesktop</groupId>
             <artifactId>beansbinding</artifactId>
             <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-            <version>2.5.6.SEC03</version>
         </dependency>
     </dependencies>
 </project>

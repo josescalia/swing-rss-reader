@@ -1,6 +1,6 @@
 package org.josescalia.rss.dao;
 
-import com.josescalia.common.dao.CommonDao;
+import org.josescalia.common.dao.CommonDao;
 import org.josescalia.rss.model.Rss;
 
 /**

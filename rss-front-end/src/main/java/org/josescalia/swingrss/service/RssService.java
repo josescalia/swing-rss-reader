@@ -1,6 +1,5 @@
 package org.josescalia.swingrss.service;
 
-import com.josescalia.common.services.CommonService;
 import org.josescalia.rss.model.Rss;
 
 /**
@@ -10,5 +9,5 @@ import org.josescalia.rss.model.Rss;
  * Time: 11:38 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface RssService extends CommonService<Rss,Long> {
+public interface RssService {
 }

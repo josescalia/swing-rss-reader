@@ -1,6 +1,6 @@
 package org.josescalia.rss.dao.impl;
 
-import com.josescalia.common.dao.impl.CommonDaoImpl;
+import org.josescalia.common.dao.impl.CommonDaoImpl;
 import org.josescalia.rss.dao.RssDao;
 import org.josescalia.rss.model.Rss;
 import org.springframework.stereotype.Repository;

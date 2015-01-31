@@ -5,19 +5,22 @@
 package org.josescalia.swingrss.gui;
 
 import java.awt.BorderLayout;
-import javax.swing.ImageIcon;
-import javax.swing.UIManager;
+import javax.swing.*;
+
+import org.apache.log4j.Logger;
 import org.josescalia.swingrss.gui.form.AboutForm;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.josescalia.swingrss.gui.form.LandFForm;
 import org.josescalia.swingrss.gui.form.RssFeedForm;
 import org.josescalia.swingrss.gui.form.RssReaderForm;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
  * @author Josescalia
  */
 public class MainApp extends javax.swing.JFrame {
+    static Logger logger = Logger.getLogger(MainApp.class.getName());
     public static ApplicationContext ctx;
     /**
      * Creates new form MainApp
@@ -27,6 +30,21 @@ public class MainApp extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void setLookAndFeel(String lfClassName){
+        try {
+            UIManager.setLookAndFeel(lfClassName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+        new MainApp().setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,9 +61,11 @@ public class MainApp extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnRssReader = new javax.swing.JMenuItem();
+        mnSuggestedFeed = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mnSuggestedFeed = new javax.swing.JMenuItem();
+        mnLFSetting = new javax.swing.JMenuItem();
         mnAboutBox = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,12 +75,12 @@ public class MainApp extends javax.swing.JFrame {
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
+                mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 665, Short.MAX_VALUE)
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -70,11 +90,11 @@ public class MainApp extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblPanelAction, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 941, Short.MAX_VALUE)
-                .addComponent(jLabel2))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblPanelAction, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 941, Short.MAX_VALUE)
+                                .addComponent(jLabel2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,6 +114,15 @@ public class MainApp extends javax.swing.JFrame {
         });
         jMenu1.add(mnRssReader);
 
+        mnSuggestedFeed.setText("Suggested Feed");
+        mnSuggestedFeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnSuggestedFeedActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnSuggestedFeed);
+        jMenu1.add(jSeparator1);
+
         mnExit.setText("Quit");
         mnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,15 +133,15 @@ public class MainApp extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Setting");
 
-        mnSuggestedFeed.setText("Suggested Feed");
-        mnSuggestedFeed.addActionListener(new java.awt.event.ActionListener() {
+        mnLFSetting.setText("Look And Feel");
+        mnLFSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnSuggestedFeedActionPerformed(evt);
+                mnLFSettingActionPerformed(evt);
             }
         });
-        jMenu2.add(mnSuggestedFeed);
+        jMenu2.add(mnLFSetting);
 
         mnAboutBox.setText("About");
         mnAboutBox.addActionListener(new java.awt.event.ActionListener() {
@@ -179,8 +208,19 @@ public class MainApp extends javax.swing.JFrame {
         lblPanelAction.setText("About Swing RssReader Application");
     }//GEN-LAST:event_mnAboutBoxActionPerformed
 
+    private void mnLFSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLFSettingActionPerformed
+        removePanelFromMain();
+        LandFForm form = ctx.getBean(LandFForm.class);
+        form.showForm();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(form);
+        mainPanel.validate();
+        lblPanelAction.setText("Look and Feel Setting");
+    }//GEN-LAST:event_mnLFSettingActionPerformed
+
     private void removePanelFromMain(){
         if (mainPanel.getComponentCount() > 0) {
+            logger.info("Existing component :" + mainPanel.getComponentCount());
             //remove All from MainPanel
             for (int i = 0; i < mainPanel.getComponentCount(); i++) {
                 mainPanel.remove(i);
@@ -232,10 +272,12 @@ public class MainApp extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblPanelAction;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuItem mnAboutBox;
     private javax.swing.JMenuItem mnExit;
+    private javax.swing.JMenuItem mnLFSetting;
     private javax.swing.JMenuItem mnRssReader;
     private javax.swing.JMenuItem mnSuggestedFeed;
     // End of variables declaration//GEN-END:variables
